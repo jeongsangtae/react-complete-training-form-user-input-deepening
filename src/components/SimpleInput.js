@@ -41,7 +41,7 @@ const SimpleInput = (props) => {
     setEnteredNameTouched(true);
     setEnteredEmailTouched(true);
 
-    if (!enteredNameIsValid && !enteredEmailIsValid) {
+    if (!enteredNameIsValid) {
       return;
     }
 
