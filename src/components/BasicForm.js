@@ -2,19 +2,21 @@ import React, { useState } from "react";
 
 const BasicForm = (props) => {
   const [enteredFirstName, setEnteredFirstName] = useState("");
-  const [enteredLastName, setEnteredLastName] = useState("");
-  const [enteredEmail, setEnteredEmail] = useState("");
-
   const [firstNameTouch, setFirstNameTouch] = useState(false);
+
+  const [enteredLastName, setEnteredLastName] = useState("");
   const [lastNameTouch, setLastNameTouch] = useState(false);
+
+  const [enteredEmail, setEnteredEmail] = useState("");
   const [emailTouch, setEmailTouch] = useState(false);
 
   const firstNameIsValid = enteredFirstName.trim() !== "";
-  const lastNameIsValid = enteredLastName.trim() !== "";
-  const emailIsValid = enteredEmail.includes("@");
-
   const firstNameInputTouch = !firstNameIsValid && firstNameTouch;
+
+  const lastNameIsValid = enteredLastName.trim() !== "";
   const lastNameInputTouch = !lastNameIsValid && lastNameTouch;
+
+  const emailIsValid = enteredEmail.includes("@");
   const emailInputTouch = !emailIsValid && emailTouch;
 
   let formIsVaild = false;
@@ -22,24 +24,6 @@ const BasicForm = (props) => {
   if (firstNameIsValid && lastNameIsValid && emailIsValid) {
     formIsVaild = true;
   }
-
-  const submitHandler = (event) => {
-    event.preventDefault();
-
-    if (!firstNameIsValid && !lastNameIsValid && emailIsValid) {
-      return;
-    }
-
-    console.log(enteredFirstName, enteredLastName, enteredEmail);
-
-    setEnteredFirstName("");
-    setEnteredLastName("");
-    setEnteredEmail("");
-
-    setFirstNameTouch(false);
-    setLastNameTouch(false);
-    setEmailTouch(false);
-  };
 
   const firstNameChangeHandler = (event) => {
     setEnteredFirstName(event.target.value);
@@ -63,6 +47,28 @@ const BasicForm = (props) => {
 
   const emailBlurHandler = () => {
     setEmailTouch(true);
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    setFirstNameTouch(true);
+    setLastNameTouch(true);
+
+    if (!firstNameIsValid && !lastNameIsValid) {
+      return;
+    }
+
+    console.log(enteredFirstName, enteredLastName, enteredEmail);
+
+    setEnteredFirstName("");
+    setFirstNameTouch(false);
+
+    setEnteredLastName("");
+    setLastNameTouch(false);
+
+    setEnteredEmail("");
+    setEmailTouch(false);
   };
 
   const firstNameInputValid = firstNameInputTouch
