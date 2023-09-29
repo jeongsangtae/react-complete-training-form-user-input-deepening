@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-const useForm = () => {
+const useForm = (validInputValue) => {
   const [enteredValue, setEnteredValue] = useState("");
   const [isTouched, setIsTouched] = useState(false);
 
-  const valueIsValid = enteredValue.trim() !== "";
+  const valueIsValid = validInputValue(enteredValue);
   const hasError = !valueIsValid && isTouched;
 
   const valueChangeHandler = (event) => {
