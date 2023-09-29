@@ -2,6 +2,9 @@ import React from "react";
 
 import useForm from "../hooks/use-form";
 
+const isNotEmpty = (value) => value.trim() !== "";
+const isEmail = (value) => value.includes("@");
+
 const BasicForm = (props) => {
   const {
     value: enteredFirstName,
@@ -10,7 +13,7 @@ const BasicForm = (props) => {
     valueChangeHandler: firstNameChangeHandler,
     inputBlurHandler: firstNameBlurHandler,
     reset: resetFirstNameInput,
-  } = useForm((value) => value.trim() !== "");
+  } = useForm(isNotEmpty);
 
   const {
     value: enteredLastName,
@@ -19,7 +22,7 @@ const BasicForm = (props) => {
     valueChangeHandler: lastNameChangeHandler,
     inputBlurHandler: lastNameBlurHandler,
     reset: resetLastNameInput,
-  } = useForm((value) => value.trim() !== "");
+  } = useForm(isNotEmpty);
 
   const {
     value: enteredEmail,
@@ -28,7 +31,7 @@ const BasicForm = (props) => {
     valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
     reset: resetEamilInput,
-  } = useForm((value) => value.includes("@"));
+  } = useForm(isEmail);
 
   let formIsVaild = false;
 
@@ -43,7 +46,7 @@ const BasicForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    if (!enteredFirstNameIsValid && !enteredLastNameIsValid) {
+    if (!formIsVaild) {
       return;
     }
 
